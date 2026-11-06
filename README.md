@@ -1,1 +1,18 @@
-# EngCoach
+# Lexique C1 — mise en route
+
+## 1. Firebase (forfait Spark, gratuit)
+1. console.firebase.google.com > Ajouter un projet (désactive Google Analytics).
+2. **Authentication** > Commencer > Google > Activer.
+3. **Firestore Database** > Créer (mode production, région europe-west).
+4. Onglet **Règles** : colle le contenu de `firestore.rules` > Publier.
+5. Paramètres du projet > Tes applications > Web (`</>`) : copie le bloc `firebaseConfig`. Tu le colleras dans l'app au premier lancement (rien dans le dépôt). À refaire sur chaque appareil.
+6. Authentication > Paramètres > Domaines autorisés : ajoute `TON-PSEUDO.github.io`.
+
+## 2. Test local
+`python3 -m http.server 8000` puis http://localhost:8000 (localhost est autorisé par défaut) ; colle la config Firebase quand l'app la demande.
+
+## 3. GitHub Pages
+Dépôt GitHub > pousse tous les fichiers > Settings > Pages > Branch `main`, dossier `/ (root)`.
+
+## 4. IA
+Paramètres > fournisseur, clé, nom exact du modèle > Tester. La clé reste dans le navigateur.

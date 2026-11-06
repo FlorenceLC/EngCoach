@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    // Chaque utilisateur n'accède qu'à ses propres données.
+    // Pour verrouiller sur ton seul compte : remplace par request.auth.uid == "TON_UID"
+    match /users/{uid}/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}

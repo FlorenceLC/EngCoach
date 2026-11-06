@@ -3,10 +3,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Lexique C1</title><link rel="stylesheet" href="css/styles.css"></head>
 <body>
+<p id="boot" style="padding:1rem;font-family:system-ui">Chargement…</p>
+<script>
+// Affiche toute erreur au lieu d'un écran blanc.
+function showErr(m){document.getElementById("boot").innerHTML="<b>Erreur au démarrage</b><br>"+m;document.getElementById("boot").hidden=false}
+if(location.protocol==="file:")showErr("L'app ne peut pas s'ouvrir par double-clic (file://). Lance un serveur local (<code>python3 -m http.server 8000</code> puis http://localhost:8000) ou utilise l'adresse GitHub Pages.");
+addEventListener("error",e=>showErr(e.message));addEventListener("unhandledrejection",e=>showErr(e.reason&&e.reason.message||e.reason));
+</script>
 <section id="login" hidden><h1>Lexique C1</h1><p>Ton vocabulaire anglais, révisé chaque jour.</p><button id="loginBtn" class="btn">Se connecter avec Google</button>
 <div id="setup" hidden><p>Colle la configuration de ton application web Firebase (Console Firebase > Paramètres du projet > Tes applications). Elle reste dans ce navigateur.</p><textarea id="cfgTxt" rows="8" placeholder='apiKey: "…", authDomain: "…", projectId: "…", appId: "…"'></textarea><button id="saveCfg" class="btn">Enregistrer la configuration</button></div></section>
 <div id="app" hidden>
 <nav><b>Lexique C1</b><a href="#/">Accueil</a><a href="#/review">Réviser</a><a href="#/library">Bibliothèque</a><a href="#/add">Ajouter</a><a href="#/settings">Paramètres</a><span id="sync"></span><button id="logout" class="link">Déconnexion</button></nav>
 <main id="view"></main></div>
-<script type="module" src="js/app.js"></script>
+<script type="module" src="js/app.js" onerror="showErr('Fichier js/app.js introuvable ou module bloqué. Vérifie que tous les dossiers js/ et css/ sont bien publiés.')"></script>
 </body></html>
