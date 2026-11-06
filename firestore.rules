@@ -1,10 +1,13 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{db}/documents {
-    // Chaque utilisateur n'accède qu'à ses propres données.
-    // Pour verrouiller sur ton seul compte : remplace par request.auth.uid == "TON_UID"
-    match /users/{uid}/{document=**} {
-      allow read, write: if request.auth != null && request.auth.uid == uid;
+    // Pas d'authentification : l'accès repose sur l'identifiant secret (hash de ton code, 64 caractères).
+    // Seuls ces deux chemins existent ; aucune requête globale n'est possible.
+    match /users/{uid}/words/{id} {
+      allow read, write: if uid.size() == 64;
+    }
+    match /users/{uid}/meta/{id} {
+      allow read, write: if uid.size() == 64;
     }
   }
 }
