@@ -1,21 +1,21 @@
-:root{--bg:#f7f8fa;--ink:#1b2430;--mut:#667085;--acc:#1f5f8b;--ok:#2f7d5b;--ko:#b3402f;--line:#dde2e9}
+:root{--bg:#e7e5e6;--sf:#f2f0f1;--ink:#2a2326;--mut:#6d6468;--acc:#7b1f34;--accd:#4f1221;--tint:#e3d2d6;--ok:#2f6b4f;--ko:#b3402f;--line:#cdc8ca}
 *{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--ink)}
-h1,h2{font-family:Georgia,serif;font-weight:600}h1{font-size:1.8rem;margin:.2em 0 .6em}h2{font-size:1.2rem;margin-top:1.8em}
+h1,h2{font-family:Georgia,serif;font-weight:600;color:var(--accd)}h1{font-size:1.8rem;margin:.2em 0 .6em}h2{font-size:1.2rem;margin-top:1.8em}
 #login{max-width:360px;margin:20vh auto;text-align:center;padding:0 1rem}
 #app{display:flex;min-height:100vh}
-nav{width:200px;padding:1.2rem;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:.3rem;background:#fff}
-nav a{padding:.5rem .7rem;border-radius:6px;color:var(--ink);text-decoration:none}nav a.on{background:var(--acc);color:#fff}
-#sync{margin-top:auto;font-size:.8rem;color:var(--mut)}
+nav{width:200px;padding:1.2rem;display:flex;flex-direction:column;gap:.3rem;background:var(--accd);color:#f1e4e8}
+nav a{padding:.5rem .7rem;border-radius:6px;color:#e6d3d8;text-decoration:none}nav a.on{background:var(--acc);color:#fff}
+#sync{margin-top:auto;font-size:.8rem;color:#cdb3ba}
 main{flex:1;padding:1.5rem;max-width:860px}
 .btn,button{font:inherit;background:var(--acc);color:#fff;border:0;border-radius:6px;padding:.6rem 1rem;cursor:pointer;text-decoration:none;display:inline-block}
-button.alt{background:#fff;color:var(--ink);border:1px solid var(--line)}button.link{background:none;color:var(--mut);padding:.3rem .7rem;text-align:left}
+button.alt{background:var(--sf);color:var(--ink);border:1px solid var(--line)}button.link{background:none;color:var(--acc);padding:.3rem .7rem;text-align:left}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-input,select,textarea{font:inherit;padding:.55rem;border:1px solid var(--line);border-radius:6px;width:100%;margin:.2rem 0 .8rem;background:#fff}
+input,select,textarea{font:inherit;padding:.55rem;border:1px solid var(--line);border-radius:6px;width:100%;margin:.2rem 0 .8rem;background:var(--sf)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.8rem;margin-top:1rem}
-.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:.9rem}.card b{display:block;font-size:1.6rem}.card span{color:var(--mut);font-size:.85rem}
+.card{background:var(--sf);border:1px solid var(--line);border-radius:8px;padding:.9rem}.card b{display:block;font-size:1.6rem}.card span{color:var(--mut);font-size:.85rem}
 .chart{display:flex;align-items:flex-end;gap:4px;height:100px;border-bottom:1px solid var(--line)}.chart i{flex:1;background:var(--acc);min-height:2px;border-radius:2px 2px 0 0}
-.word{background:#fff;border:1px solid var(--line);border-radius:8px;padding:.8rem 1rem;margin:.6rem 0}
-.word small,.mut{color:var(--mut)}.tag{font-size:.75rem;padding:.1rem .5rem;border-radius:99px;background:#e8eef4;margin-left:.4rem}
-.q{font-size:1.3rem;margin:1rem 0}.opts{display:grid;gap:.5rem}.opts button{background:#fff;color:var(--ink);border:1px solid var(--line);text-align:left}
+.word{background:var(--sf);border:1px solid var(--line);border-radius:8px;padding:.8rem 1rem;margin:.6rem 0}
+.word small,.mut{color:var(--mut)}.tag{font-size:.75rem;padding:.1rem .5rem;border-radius:99px;background:var(--tint);color:var(--accd);margin-left:.4rem}
+.q{font-size:1.3rem;margin:1rem 0}.opts{display:grid;gap:.5rem}.opts button{background:var(--sf);color:var(--ink);border:1px solid var(--line);text-align:left}
 .good{color:var(--ok)}.bad{color:var(--ko)}.row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
-@media(max-width:700px){#app{flex-direction:column}nav{width:auto;flex-direction:row;flex-wrap:wrap;border:0;border-bottom:1px solid var(--line)}nav b,#sync{display:none}}
+@media(max-width:700px){#app{flex-direction:column}nav{width:auto;flex-direction:row;flex-wrap:wrap;border:0}nav b,#sync{display:none}nav{border:0}}
