@@ -12,6 +12,7 @@ const shuffle=a=>[...a].sort(()=>Math.random()-.5);
 let words=[],daily={};
 
 F.setStatus(s=>$("#sync").textContent={saving:"Enregistrement…",ok:"✓ Sauvegardé",error:"⚠ Échec de sauvegarde"}[s]);
+document.getElementById("boot").hidden=true;
 const hasCfg=F.init();
 if(!hasCfg){$("#login").hidden=false;$("#loginBtn").hidden=true;$("#setup").hidden=false}
 $("#saveCfg").onclick=()=>{const c=F.parseConfig($("#cfgTxt").value);if(!c)return alert("Configuration illisible : colle le bloc complet (apiKey, projectId, appId…).");F.setConfig(c);location.reload()};
