@@ -19,10 +19,9 @@ async function start(){
   catch(e){view.innerHTML=`<p class=bad>Chargement impossible : ${esc(e.message)}. Vérifie la configuration Firebase (Paramètres) et que les règles Firestore sont publiées.</p>`;return}
   route();
 }
-if(hasCfg&&F.getUid())start();
-else{$("#login").hidden=false;$("#setup").hidden=hasCfg;$("#codeBox").hidden=!hasCfg}
-$("#saveCfg").onclick=()=>{const c=F.parseConfig($("#cfgTxt").value);if(!c)return alert("Configuration illisible : colle le bloc complet (apiKey, projectId, appId…).");F.setConfig(c);location.reload()};
-$("#loginBtn").onclick=async()=>{const v=$("#code").value.trim();if(v.length<8)return alert("Code trop court : 8 caractères minimum.");await F.setCode(v);location.reload()};
+if(hasCfg)start();
+else{$("#login").hidden=false;$("#setup").hidden=false}
+$("#saveCfg").onclick=()=>{const c=F.buildConfig($("#fkey").value.trim(),$("#fapp").value.trim(),$("#fproj").value.trim());if(!c)return alert("Renseigne les trois champs.");F.setConfig(c);location.reload()};
 F.setStatus(s=>$("#sync").textContent={saving:"Enregistrement…",ok:"✓ Sauvegardé",error:"⚠ Échec de sauvegarde"}[s]);
 addEventListener("hashchange",route);
 addEventListener("hashchange",route);
@@ -142,18 +141,16 @@ function settings(){
   <label>Nom exact du modèle<input id=m value="${esc(c.model||"")}"></label>
   <div class=row><button id=sv>Enregistrer</button><button id=ts class=alt>Tester la connexion</button></div><p id=tm></p>
   <p class=mut>La clé reste uniquement dans ce navigateur (localStorage) et n'est jamais envoyée à Firestore. Elle est à saisir sur chaque appareil.</p>
-  <h2>Firebase</h2><p class=mut>Projet actuel : <b>${esc(F.getConfig()?.projectId)}</b></p>
-  <textarea id=cfg2 rows=5 placeholder="Colle une nouvelle configuration pour remplacer l'actuelle"></textarea>
-  <div class=row><button id=cfgSave class=alt>Remplacer la configuration</button><button id=cfgClear class=alt>Effacer la configuration</button><button id=codeClear class=alt>Changer de code</button></div>
+  <h2>Firebase</h2><label>API key<input id=fk value="${esc(F.getConfig()?.apiKey)}"></label><label>App ID<input id=fa value="${esc(F.getConfig()?.appId)}"></label><label>Project ID<input id=fp value="${esc(F.getConfig()?.projectId)}"></label>
+  <div class=row><button id=cfgSave class=alt>Enregistrer la configuration</button><button id=cfgClear class=alt>Effacer la configuration</button></div>
   <h2>Révisions</h2><label>Questions par session<input id=n type=number min=3 max=50 value="${+localStorage.sessN||10}"></label>
   <h2>Sauvegarde</h2><div class=row><button id=ex class=alt>Exporter en JSON</button><button id=im class=alt>Importer un JSON</button><input id=f type=file accept=.json hidden></div><p id=bm></p>`;
   const read=()=>({provider:$("#p").value,key:$("#k").value.trim(),model:$("#m").value.trim()});
   $("#sv").onclick=()=>{setCfg(read());localStorage.sessN=$("#n").value;$("#tm").textContent="Enregistré."};
   $("#ts").onclick=async()=>{setCfg(read());$("#tm").textContent="Test…";try{await ask("Reply with: OK");$("#tm").innerHTML=`<span class=good>✓ Connexion valide — modèle : ${esc(read().model)}</span>`}catch(e){$("#tm").innerHTML=`<span class=bad>${esc(e.message)}</span>`}};
   $("#ex").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify({version:1,words,daily},null,1)],{type:"application/json"}));a.download=`lexique-${S.today()}.json`;a.click()};
-  $("#cfgSave").onclick=()=>{const c=F.parseConfig($("#cfg2").value);if(!c)return alert("Configuration illisible.");F.setConfig(c);location.reload()};
+  $("#cfgSave").onclick=()=>{const c=F.buildConfig($("#fk").value.trim(),$("#fa").value.trim(),$("#fp").value.trim());if(!c)return alert("Renseigne les trois champs.");F.setConfig(c);location.reload()};
   $("#cfgClear").onclick=()=>{if(confirm("Effacer la configuration Firebase de cet appareil ? Tes données restent dans Firestore.")){F.clearConfig();location.reload()}};
-  $("#codeClear").onclick=()=>{if(confirm("Changer de code ? Tu accéderas alors aux données liées au nouveau code (les anciennes restent dans Firestore).")){F.clearCode();location.reload()}};
   $("#im").onclick=()=>$("#f").click();
   $("#f").onchange=async e=>{try{const d=JSON.parse(await e.target.files[0].text());const have=new Set(words.map(w=>w.en.toLowerCase()));
     const fresh=(d.words||[]).filter(w=>w.en&&!have.has(w.en.toLowerCase())).map(w=>S.newWord(w));
