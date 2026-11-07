@@ -1,13 +1,8 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{db}/documents {
-    // Pas d'authentification : l'accès repose sur l'identifiant secret (hash de ton code, 64 caractères).
-    // Seuls ces deux chemins existent ; aucune requête globale n'est possible.
-    match /users/{uid}/words/{id} {
-      allow read, write: if uid.size() == 64;
-    }
-    match /users/{uid}/meta/{id} {
-      allow read, write: if uid.size() == 64;
-    }
+    // Application personnelle sans authentification : accès limité à ces deux collections.
+    match /words/{id} { allow read, write: if true; }
+    match /meta/{id}  { allow read, write: if true; }
   }
 }

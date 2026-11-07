@@ -10,8 +10,10 @@ function showErr(m){document.getElementById("boot").innerHTML="<b>Erreur au dém
 if(location.protocol==="file:")showErr("L'app ne peut pas s'ouvrir par double-clic (file://). Lance un serveur local (<code>python3 -m http.server 8000</code> puis http://localhost:8000) ou utilise l'adresse GitHub Pages.");
 addEventListener("error",e=>showErr(e.message));addEventListener("unhandledrejection",e=>showErr(e.reason&&e.reason.message||e.reason));
 </script>
-<section id="login" hidden><h1>Lexique C1</h1><p>Ton vocabulaire anglais, révisé chaque jour.</p><div id="codeBox" hidden><p>Choisis un code personnel (8 caractères minimum, le plus long possible). Utilise le même sur tous tes appareils pour retrouver tes mots.</p><input id="code" type="password" autocomplete="off"><button id="loginBtn" class="btn">Continuer</button></div>
-<div id="setup" hidden><p>Colle la configuration de ton application web Firebase (Console Firebase > Paramètres du projet > Tes applications). Elle reste dans ce navigateur.</p><textarea id="cfgTxt" rows="8" placeholder='apiKey: "…", authDomain: "…", projectId: "…", appId: "…"'></textarea><button id="saveCfg" class="btn">Enregistrer la configuration</button></div></section>
+<section id="login" hidden><h1>Lexique C1</h1><p>Ton vocabulaire anglais, révisé chaque jour.</p>
+<div id="setup" hidden><p>Configuration Firebase (Console Firebase > Paramètres du projet > Tes applications). Elle reste dans ce navigateur.</p>
+<label>API key<input id="fkey" autocomplete="off"></label><label>App ID<input id="fapp" autocomplete="off"></label><label>Project ID<input id="fproj" autocomplete="off"></label>
+<button id="saveCfg" class="btn">Enregistrer et démarrer</button></div></section>
 <div id="app" hidden>
 <nav><b>Lexique C1</b><a href="#/">Accueil</a><a href="#/review">Réviser</a><a href="#/library">Bibliothèque</a><a href="#/add">Ajouter</a><a href="#/settings">Paramètres</a><span id="sync"></span></nav>
 <main id="view"></main></div>

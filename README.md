@@ -2,11 +2,10 @@
 
 ## 1. Firebase (forfait Spark, gratuit)
 1. console.firebase.google.com > Ajouter un projet (désactive Google Analytics).
-2. (Aucune authentification à activer.)
+2. (Aucune authentification.)
 3. **Firestore Database** > Créer (mode production, région europe-west).
 4. Onglet **Règles** : colle le contenu de `firestore.rules` > Publier.
-5. Paramètres du projet > Tes applications > Web (`</>`) : copie le bloc `firebaseConfig`. Tu le colleras dans l'app au premier lancement (rien dans le dépôt). À refaire sur chaque appareil.
-6. Au premier lancement : colle la config, puis choisis un code personnel (identique sur chaque appareil).
+5. Paramètres du projet > Tes applications > Web (`</>`) : note `apiKey`, `appId` et `projectId`. Tu les saisis dans l'app au premier lancement (rien dans le dépôt). À refaire sur chaque appareil.
 
 ## 2. Test local
 `python3 -m http.server 8000` puis http://localhost:8000 (localhost est autorisé par défaut) ; colle la config Firebase quand l'app la demande.
